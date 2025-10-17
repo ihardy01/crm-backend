@@ -16,7 +16,7 @@ app.use(express.urlencoded({ extended: true }));
 require("./database/init.mongodb");
 
 //init routes
-// app.use("/", require("./routes"));
+app.use("/", require("./routes"));
 
 
 //handle errors
