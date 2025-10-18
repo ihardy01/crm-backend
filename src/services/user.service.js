@@ -1,48 +1,20 @@
 "use strict";
 
-const userModel = require("../models/user.model");
+const userRepo = require("../models/repositories/user.repo");
 
-const findByEmail = async ({
-    email,
-    select = {
-        username: 1,
-        name: 1,
-        email: 1,
-        password: 2,
-        salt: 2,
-        sex: 1,
-        phone: 1,
-        avatar: 1,
-        dob: 1,
-        role: 2,
-        status: 1,
-    },
-}) => {
-    return await userModel.findOne({ email }).select(select).lean();
-};
+class UserService {
+    async findByEmail(email) {
+        return await userRepo.findByEmail({ email });
+    }
 
-const findByUsername = async ({
-    username,
-    select = {
-        username: 1,
-        name: 1,
-        email: 1,
-        password: 2,
-        salt: 2,
-        sex: 1,
-        phone: 1,
-        avatar: 1,
-        dob: 1,
-        role: 2,
-        status: 1,
-    },
-}) => {
-    return await userModel.findOne({ username }).select(select).lean();
-};
+    async findByUsername(username) {
+        return await userRepo.findByUsername({ username });
+    }
 
+    async createUser({ username, name, email, password, avatar = null, dob = null, sex = null, phone = null, role = 'agent', status = 'active' }) {
+        const newUser = await userRepo.createUser({ username, name, email, password, avatar, dob, sex, phone, role, status });
+        return newUser;
+    }
+}
 
-
-module.exports = {
-    findByEmail,
-    findByUsername
-};
+module.exports = new UserService();
