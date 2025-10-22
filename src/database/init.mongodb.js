@@ -4,10 +4,10 @@ const mongoose = require("mongoose");
 const { countConnect } = require("../helpers/check.connect");
 
 const {
-  db: { host, port, name },
+  db: { host, port, name, username, password },
 } = require("../config/config.mongodb");
 
-const connectString = `mongodb://${host}:${port}/${name}`;
+const connectString = `mongodb://${username}:${password}@${host}:${port}`;
 
 //Viết singleton để khởi tạo 1 kết nối
 class Database {

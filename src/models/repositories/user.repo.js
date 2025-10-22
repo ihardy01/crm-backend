@@ -38,6 +38,10 @@ const findByUsername = async ({
     return await userModel.findOne({ username }).select(select).lean();
 };
 
+const findByUserId = async ({ userId, select = {} }) => {
+    return await userModel.findById(userId).select(select).lean();
+};
+
 
 const createUser = async (userData) => {
     const newUser = await userModel.create(userData);
@@ -47,5 +51,6 @@ const createUser = async (userData) => {
 module.exports = {
     findByEmail,
     findByUsername,
-    createUser
+    findByUserId,
+    createUser,
 }

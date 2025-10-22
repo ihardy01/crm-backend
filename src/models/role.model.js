@@ -4,7 +4,7 @@ const DOCUMENT_NAME = 'Role';
 const COLLECTION_NAME = 'roles';
 
 const modelSchema = new Schema({
-    name: { type: String, default: 'user', enum: ['user', 'shop', 'admin'] },
+    name: { type: String, default: '' },
     slug: { type: String, required: true },
     status: { type: String, default: 'pending', enum: ['pending', 'active', 'block'] },
     description: { type: String, default: '' },
